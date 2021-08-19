@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Queue;
 
 @Repository
 public class UserDaoImp implements UserDao {
@@ -30,15 +31,14 @@ public class UserDaoImp implements UserDao {
     }
 
     @Override
-    public List<User> getUserByCar(String model, int series) {
-        List<User> listUser = sessionFactory.openSession()
-                .createQuery("FROM User u LEFT OUTER JOIN FETCH u.car " +
-                        "WHERE u.car.model =: model " +
-                        "AND u.car.series =: series", User.class)
+    public User getUserByCar(String model, int series) {
+        Session session = sessionFactory.openSession();
+        User user = session.createQuery("FROM User u " +
+                        "WHERE u.car.model=:model " +
+                        "AND u.car.series=:series", User.class)
                 .setParameter("model", model)
                 .setParameter("series", series)
-                .list();
-
-        return listUser;
+                .getSingleResult();
+        return user;
     }
 }

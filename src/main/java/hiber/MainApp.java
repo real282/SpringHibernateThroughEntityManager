@@ -33,10 +33,8 @@ public class MainApp {
             System.out.println();
         }
 
-        List<User> listUsers = userService.getUserByCar("TOYOTA", 200);
-        for (User user : listUsers) {
-            System.out.println(user.getFirstName());
-        }
+        User user= userService.getUserByCar("TOYOTA", 200);
+        System.out.println(user.getFirstName());
 
         context.close();
     }
