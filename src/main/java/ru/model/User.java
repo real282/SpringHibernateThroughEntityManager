@@ -1,4 +1,4 @@
-package hiber.model;
+package ru.model;
 
 import javax.persistence.*;
 
@@ -7,6 +7,7 @@ import javax.persistence.*;
 public class User {
 
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -19,25 +20,17 @@ public class User {
     @Column(name = "email")
     private String email;
 
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "car_id")
-    private Car car;
+    @Column(name="male")
+    private boolean male;
 
     public User() {
     }
 
-    public User(String firstName, String lastName, String email) {
+    public User(String firstName, String lastName, String email, boolean male) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-    }
-
-    public User(String firstName, String lastName, String email, Car car) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.car = car;
+        this.male = male;
     }
 
     public Long getId() {
@@ -72,11 +65,22 @@ public class User {
         this.email = email;
     }
 
-    public Car getCar() {
-        return car;
+    public boolean getMale() {
+        return male;
     }
 
-    public void setCar(Car car) {
-        this.car = car;
+    public void setMale(boolean male) {
+        this.male = male;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", male=" + male +
+                '}';
     }
 }

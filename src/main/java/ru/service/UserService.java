@@ -1,6 +1,6 @@
-package hiber.service;
+package ru.service;
 
-import hiber.model.User;
+import ru.model.User;
 
 import java.util.List;
 
@@ -9,5 +9,8 @@ public interface UserService {
 
     List<User> listUsers();
 
-    User getUserByCar(String model, int series);
+    User getUserId(long id);
+
+    void delete(long id);
+
 }
